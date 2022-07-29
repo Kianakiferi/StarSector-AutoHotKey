@@ -1,5 +1,5 @@
 # StarSector-AutoHotKey
-My AutoHotKey for StarSector  
+My AutoHotKey script for StarSector, To help quick input commands.
 
 **Require Mod** : [Console Commands](https://fractalsoftworks.com/forum/index.php?topic=4106.0)
 ## Usage
