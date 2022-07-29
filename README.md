@@ -28,3 +28,6 @@ It Has the following themes:
 - Faction
 - Plant
 - BluePrint
+
+## TODO
+- AutoHotKey with GUI
