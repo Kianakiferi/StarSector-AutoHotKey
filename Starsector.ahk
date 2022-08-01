@@ -1,217 +1,203 @@
-﻿#NoEnv  ; Recommended for performance and compatibility with future AutoHotkey releases.
-#IfWinActive ahk_class LWJGL
-; #Warn  ; Enable warnings to assist with detecting common errors.
-SendMode Input  ; Recommended for new scripts due to its superior speed and reliability.
-SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
+﻿#NoEnv
+#SingleInstance, Force
+; #Warn
+#Include, <csv>
+
+SendMode Input
+SetWorkingDir %A_ScriptDir%
 SetKeyDelay, 35
 
-;region Combat
-
-!1:: ; InfiniteAmmo
-{
-    SendToConsoleWithEnter("InfiniteAmmo")
-    
-    Return
+;region Main
+commandFileName := "quick_commands.csv"
+if !FileExist(commandFileName) {
+    ExitApp
+    ; TODO: 写入默认热命令
 }
 
-!q:: ; InfiniteAmmo, Flux, NoCoolDown
-{
-    array :=["InfiniteFlux", "InfiniteAmmo", "NoCoolDown"]
+CSV_Load(commandFileName,"commandsCSV")
 
-    SendArrayToConsole(array)
-    Return
-}
+global commandList := LoadCommands()
 
-;endregion
+RegistCommands(commandList)
 
-;region Ship
-
-!2:: ; AddShip
-{
-    SendToConsoleWithSpace("AddShip")
-
-    Return
-}
-
-!w:: ; AddOrdnancePoints 150
-{
-    SendToConsoleWithEnter("AddOrdnancePoints 150")
-
-    Return
-}
-
-;endregion
-
-;region Weapon
-
-!3:: ; AddWeapon
-{
-    SendToConsoleWithSpace("AddWeapon")
-
-    Return
-}
-
-; TODO: 快速添加一些武器
-
-;endregion
-
-;region Item
-
-!4:: ; AddSupplies Fuel
-{
-    array :=["AddItem Supplies 2000", "AddItem Fuel 1500"]
-
-    SendArrayToConsole(array)
-    Return
-}
-
-!r:: ; AddSupplies, Crew, Fuel
-{
-    array :=["AddSupplies","AddCrew", "AddFuel"]
-
-    SendArrayToConsole(array)
-    Return
-}
- 
-!f:: ; TODO: Add something
-{
-    Return
-}
-
-!v:: ; AddItem to build a space station
-{
-    array :=["AddItem metal 1000", "AddItem supplies 300", "AddItem rare_metal 200", "AddItem heavry_machinery 150"]
-
-    SendArrayToConsole(array)
-    Return
-}
-
-;endregion
-
-;region Items about colony
-
-!5:: ; AddItem Marines, Weapons
-{
-    array :=["AddItem marines 1000", "AddItem hand_Weapons 500"]
-
-    SendArrayToConsole(array)
-    Return
-}
-
-!t:: ; AddItem Alpha core
-{
-    array :=["AddItem alpha_core 10"]
-
-    SendArrayToConsole(array)
-    Return
-}
-
-
-!g:: ; AddItem 
-{
-    array :=["AddItem Supplies 5000", "AddItem Fuel 3000", "AddItem heavry_machinery 1500", "AddItem food 5000", "AddItem domestic_goods 3000", "AddItem organic 2000", "AddItem luxury_goods 1000", "AddItem drugs 500"]
-
-    SendArrayToConsole(array)
-    Return
-}
-
-;endregion
-
-;region Faction
-
-!6:: ; SetRelation Hegemony
-{
-    array :=["SetRelation hegemony 20", "SetRelation hegemony tritachyon 0"]
-    
-    SendArrayToConsole(array)
-    Return
-}
-
-;endregion
-
-;region Plant
-
-!7:: ; AddCondition 
-{
-    array :=["AddCondition farmland_bountful", "AddCondition organics_plentiful", "AddCondition ore_ultrarich", "AddCondition rare_ore_urichltra", "AddCondition mild_climate"]
-
-    SendArrayToConsole(array)
-    Return
-}
-
-!u:: ; RemoveCondition 
-{
-    array :=["RemoveCondition nex_bellion_condition", "RemoveCondition pollution", "RemoveCondition recent_unrest"]
-
-    SendArrayToConsole(array)
-    Return
-}
-
-!j:: ; RemoveCondition 
-{
-    array :=["AddSpecial fullerene_spool", "AddSpecial soil_nanites", "AddSpecial mantle_bore", "AddSpecial catalytic_core", "AddSpecial pristine_nanoforge", "AddSpecial dealmaker_holosuite","AddSpecial synchrotron", "AddSpecial drone_replicator", "AddSpecial cryoarithmetic_engine"]
-
-    SendArrayToConsole(array)
-    Return
-}
-
-;endregion
-
-;region BluePrint
-
-!8:: ; BluePrints 
-{
-    array :=["AddSpecial ship_bp odyssey", "AddSpecial ship_bp paragon", "AddSpecial ship_bp astral", "AddSpecial ship_bp fury", "AddSpecial ship_bp revenant", "AddSpecial ship_bp doom", "AddSpecial ship_bp apogee", "AddSpecial ship_bp shrike", "AddSpecial ship_bp harbinger","AddSpecial ship_bp aurora", "AddSpecial ship_bp medusa", "AddSpecial ship_bp phantom",  "AddSpecial ship_bp scarab", "AddSpecial ship_bp shade", "AddSpecial ship_bp afflictor", "AddSpecial ship_bp tempest", "AddSpecial ship_bp tempest", "AddSpecial ship_bp omen", "AddSpecial ship_bp hyperion", "AddSpecial ship_bp buffalo_pirates", "AddSpecial ship_bp atlas", "AddSpecial ship_bp valkyrie", "AddSpecial ship_bp prometheus","AddSpecial ship_bp ox","AddSpecial ship_bp phaeton"]
-
-    SendArrayToConsole(array)
-    Return
-}
-
-!i::
-{
-    array :=["AddSpecial weapon_bp tachyonlance", "AddSpecial weapon_bp plasma", "AddSpecial weapon_bp amsrm", "AddSpecial weapon_bp ionpulser", "AddSpecial weapon_bp heavyburst", "AddSpecial weapon_bp heavyblaster", "AddSpecial weapon_bp phasebeam", "AddSpecial weapon_bp pulselaser","AddSpecial weapon_bp pdburst", "AddSpecial weapon_bp amblaster", "AddSpecial weapon_bp ioncannon"]
-
-    SendArrayToConsole(array)
-    Return
-}
-
-!k::
-{
-    array :=["AddSpecial weapon_bp sabotpod", "AddSpecial weapon_bp harpoonpod", "AddSpecial weapon_bp salamanderpod", "AddSpecial weapon_bp phasecl", "AddSpecial weapon_bp annihilatorpod", "AddSpecial weapon_bp typhoon", "AddSpecial weapon_bp cyclone", "AddSpecial weapon_bp hurricane", "AddSpecial weapon_bp squall", "AddSpecial weapon_bp hammerrack"]
-
-    SendArrayToConsole(array)
-    Return
-}
+AddTrayMenu()
+Return
 
 ;endregion
 
 ;region Functions
 
-SendToConsoleWithSpace(text)
-{
+LoadCommands() {
+    commandList := Array() 
+
+    ;count := (CSV_TotalRows("commandsCSV"))
+    count := 6
+
+    index := 2
+    While, (index < count) {
+        ; First cell
+        hotkeyCell := CSV_ReadCell("commandsCSV", index, 1)
+        If(InStr(hotkeyCell, "#")) {
+            index ++
+            Continue
+        }
+
+        hotkeyCell := ConvertKeyNameToModifierSymbol(hotkeyCell)
+
+        ;Second cell
+        typeCell := CSV_ReadCell("commandsCSV", index, 2)
+
+        ;Third cell
+        commandsCell := CSV_ReadCell("commandsCSV", index, 3)
+        If (InStr(commandsCell, ",")) {
+            commandsCell := StrSplit(commandsCell, ",", " ")
+        }
+
+        command := New Command(hotkeyCell, typeCell, commandsCell)
+        commandList.Insert(command)
+
+        index ++
+    }
+
+    Return commandList
+}
+
+RegistCommands(commandList) {
+    ;Hotkey, If
+    Hotkey, IfWinActive, ahk_class LWJGL
+
+    For index, item in commandList {
+        keyName := item.Hotkeys
+        Hotkey, %keyName%, ExecuteCallBack
+    }
+}
+
+; UNUSED
+DisableCommands(commandList) {
+    ;Hotkey, If
+    Hotkey, IfWinActive, ahk_class LWJGL
+
+    For index, item in commandList {
+        keyName := item.Hotkeys
+        Hotkey, %keyName%, Off
+    }
+}
+
+AddTrayMenu() {
+    Menu, Tray, NoStandard
+    Menu, Tray, Add, Open Commands.csv, OpenCommandsCSVHandler,
+    Menu, Tray, Add, Refresh Commands, RefreshCommandHandler,
+    Menu, Tray, add ; Separator
+    Menu, Tray, Standard
+}
+
+ConvertKeyNameToModifierSymbol(hotkeyName) {
+    hotkeyName := StrReplace(hotkeyName, "+", "")
+
+    hotkeyName := StrReplace(hotkeyName, "Win", "#")
+    hotkeyName := StrReplace(hotkeyName, "Alt", "!")
+    hotkeyName := StrReplace(hotkeyName, "Ctrl", "^")
+    hotkeyName := StrReplace(hotkeyName, "Shift", "+")
+
+    Return hotkeyName
+}
+
+ExecuteCallBack() {
+    ; TODO: better callback, not "for", but passing a data or using FuncObject
+
+    For index, item in commandList {
+        If (A_ThisHotkey == item.Hotkeys) {
+            Execute(item.ExecuteType, item.Commands)
+            Break
+        }
+    }
+}
+
+;#IfWinActive ahk_class LWJGL
+
+Execute(executeType, commands){
+    Switch executeType 
+    {
+    Case "Send":
+        SendCommand(commands)
+    Return
+Case "Run":
+    If IsObject(commands) {
+        RunCommandArray(commands)
+        Return
+    }
+    RunCommand(commands)
+Return
+Default:
+Return
+}
+}
+
+SendCommand(text) {
     Send %text%
     Send {Space}
 }
 
-SendToConsoleWithEnter(text)
-{
+RunCommand(text) {
     Send %text%
     Sleep 100
     Send {Enter}
     Sleep 100
 }
 
-SendArrayToConsole(array)
-{
+RunCommandArray(array) {
     for index, element in array
     {
-        Send %element%
-        Sleep 150
-        Send {Enter}
-        Sleep 150
+        RunCommand(element)
     }
 }
 
+;#IfWinActive
+
+OpenCommandsCSVHandler:
+    Run quick_commands.csv
+    Return
+
+RefreshCommandHandler:
+    commandList := ""
+    Reload
+    Return
+
 ;endregion
 
-#IfWinActive
+;region Models
+class Command {
+    Hotkeys {
+        get {
+            Return this.stored_Hotkeys
+        }
+        set {
+            Return this.stored_Hotkeys := value
+        }
+    }
+    ExecuteType {
+        get {
+            Return this.stored_ExecuteType
+        }
+        set {
+            Return this.stored_ExecuteType := value
+        }
+    }
+    Commands {
+        get {
+            Return this.stored_Commands
+        }
+        set {
+            Return this.stored_Commands := value
+        }
+    }
+
+    __New(hotkeys, executeType, commands) {
+        this.Hotkeys := hotkeys
+        this.ExecuteType := executeType
+        this.Commands := commands
+
+        Return, this
+    }
+}
+;endregion
