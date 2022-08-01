@@ -30,8 +30,8 @@ Return
 LoadCommands() {
     commandList := Array() 
 
-    ;count := (CSV_TotalRows("commandsCSV"))
-    count := 6
+    count := (CSV_TotalRows("commandsCSV"))
+    ;count := 6
 
     index := 2
     While, (index < count) {
