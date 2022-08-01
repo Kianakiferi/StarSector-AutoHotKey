@@ -86,7 +86,7 @@ DisableCommands(commandList) {
 AddTrayMenu() {
     Menu, Tray, NoStandard
     Menu, Tray, Add, Open Commands.csv, OpenCommandsCSVHandler,
-    Menu, Tray, Add, Refresh Commands, RefreshCommandHandler,
+    Menu, Tray, Add, Reload Commands, ReloadCommandHandler,
     Menu, Tray, add ; Separator
     Menu, Tray, Standard
 }
@@ -158,7 +158,7 @@ OpenCommandsCSVHandler:
     Run quick_commands.csv
     Return
 
-RefreshCommandHandler:
+ReloadCommandHandler:
     commandList := ""
     Reload
     Return
