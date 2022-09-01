@@ -2,23 +2,34 @@ HotKey,Type,Command,Description
 #Common,,,
 Alt+1,Run,InfiniteAmmo,
 Alt+Q,Run,"InfiniteFlux, InfiniteAmmo, NoCoolDown",
+Alt+Z,Run,AddStorypoints 8,
 Alt+2,Send,AddShip,
-Alt+W,Run,AddOrdnancePoints 150,添加 装配点 150
+Alt+W,Run,AddOrdnancePoints 100,添加 装配点 150
+Alt+S,Run,Repair,
+Alt+X,RUn,AddOfficer Steady 6,
 Alt+3,Send,AddWeapon,
-Alt+4,Run,"AddItem Supplies 2000, AddItem Fuel 1500","添加物品 [补给 1000, 燃油 800]"
-Alt+R,Run,"AddSupplies, AddCrew, AddFuel","执行 [AddSupplies,AddCrew, AddFuel]"
+Alt+C,Run,"InfiniteFlux Fleet, NoCoolDown Fleet",
+Alt+4,Send,AddItem,
+Alt+R,Run,"AddItem Supplies 2000, AddItem Fuel 1000","添加物品 [补给 1000, 燃油 800]"
+Alt+F,Run,"AddSupplies, AddCrew, AddFuel","执行 [AddSupplies,AddCrew, AddFuel]"
 Alt+V,Run,"AddItem metal 1000, AddItem supplies 300, AddItem rare_metal 200, AddItem heavry_machinery 150","添加物品 [金属 1000, 补给 300, 稀有金属 200, 重型机械 150]"
 Alt+5,Run,"AddItem marines 1000, AddItem hand_Weapons 500","添加物品 [陆战队员 1000, 重武器 500]"
 Alt+T,Run,AddItem alpha_core 10,添加物品 阿尔法核心 10
 Alt+G,Run,"AddItem Supplies 5000, AddItem Fuel 3000, AddItem heavry_machinery 1500, AddItem food 5000, AddItem domestic_goods 3000, AddItem organic 2000, AddItem luxury_goods 1000, AddItem drugs 500","添加 [补给 5000, 燃料 3000, 重型机械 1500, 食物 5000, 日用品 3000, 有机物 2000, 奢侈品 1000, 毒品 500]"
-Alt+B,Run,"AddSpecial fullerene_spool, AddSpecial soil_nanites, AddSpecial mantle_bore, AddSpecial catalytic_core, AddSpecial pristine_nanoforge, AddSpecial dealmaker_holosuite,AddSpecial synchrotron, AddSpecial drone_replicator, AddSpecial cryoarithmetic_engine",添加制品
+Alt+B,Run,"AddSpecial fullerene_spool, AddSpecial soil_nanites, AddSpecial mantle_bore, AddSpecial catalytic_core, AddSpecial pristine_nanoforge, AddSpecial dealmaker_holosuite, AddSpecial synchrotron, AddSpecial drone_replicator, AddSpecial cryoarithmetic_engine",添加制品
 ,,,
 #Sector,,,
-Alt+6,Run,"SetRelation hegemony 20, SetRelation hegemony tritachyon 0","设置关系 [霸主-玩家 20, 霸主-速子 0]"
+Alt+6,Send,SetRelation,"设置关系 [霸主-玩家 20, 霸主-速子 0]"
+Alt+Y,Run,"SetRelation hegemony 30, SetRelation tritachyon 30, SetRelation independent 30, SetRelation luddic_church 30, SetRelation sindrian_diktat 30, SetRelation persean 30 ",
+Alt+H,Run,"SetRelation hegemony 20, SetRelation hegemony tritachyon 0",
+Alt+N,Run,SpawnFleet tritachyon 240,
 Alt+7,Send,AddCondition,
 Alt+U,Run,"AddCondition farmland_bountful, AddCondition organics_plentiful, AddCondition ore_ultrarich, AddCondition rare_ore_urichltra, AddCondition mild_climate","添加星球条件 [+2耕地, +2有机物, +3矿物, +3稀有矿物, 温和气候,]"
+Alt+J,Run,"AddCondition population_7, AddIndustry megaport, AddIndustry farming, AddIndustry mining, AddIndustry lightindustry,  AddIndustry commerce, AddIndustry starfortress_high, AddIndustry heavybatteries,  AddIndustry militarybase,  AddIndustry waystation",
+Alt+M,Run,"AddCondition population_7, AddIndustry megaport, AddIndustry mining, AddIndustry refining, AddIndustry orbitalworks, AddIndustry fuelprod, AddIndustry commerce, AddIndustry heavybatteries,  AddIndustry militarybase,  AddIndustry waystation, AddIndustry starfortress_high, ",
 Alt+8,Send,RemoveCondition,
 Alt+I,Run,"RemoveCondition nex_bellion_condition, RemoveCondition pollution, RemoveCondition recent_unrest",移除星球负面条件
-Alt+9,Run,"AddSpecial ship_bp odyssey, AddSpecial ship_bp paragon, AddSpecial ship_bp astral, AddSpecial ship_bp fury, AddSpecial ship_bp revenant, AddSpecial ship_bp doom, AddSpecial ship_bp apogee, AddSpecial ship_bp shrike, AddSpecial ship_bp harbinger,AddSpecial ship_bp aurora, AddSpecial ship_bp medusa, AddSpecial ship_bp phantom,  AddSpecial ship_bp scarab, AddSpecial ship_bp shade, AddSpecial ship_bp afflictor, AddSpecial ship_bp tempest, AddSpecial ship_bp tempest, AddSpecial ship_bp omen, AddSpecial ship_bp hyperion, AddSpecial ship_bp buffalo_pirates, AddSpecial ship_bp atlas, AddSpecial ship_bp valkyrie, AddSpecial ship_bp prometheus,AddSpecial ship_bp ox,AddSpecial ship_bp phaeton",添加速子蓝图
-Alt+O,Run,"AddSpecial weapon_bp tachyonlance, AddSpecial weapon_bp plasma, AddSpecial weapon_bp amsrm, AddSpecial weapon_bp ionpulser, AddSpecial weapon_bp heavyburst, AddSpecial weapon_bp heavyblaster, AddSpecial weapon_bp phasebeam, AddSpecial weapon_bp pulselaser,AddSpecial weapon_bp pdburst, AddSpecial weapon_bp amblaster, AddSpecial weapon_bp ioncannon, AddSpecial weapon_bp sabotpod, AddSpecial weapon_bp harpoonpod, AddSpecial weapon_bp salamanderpod, AddSpecial weapon_bp phasecl, AddSpecial weapon_bp annihilatorpod, AddSpecial weapon_bp typhoon, AddSpecial weapon_bp cyclone, AddSpecial weapon_bp hurricane, AddSpecial weapon_bp squall, AddSpecial weapon_bp hammerrack",添加武器蓝图
+,,,
+Alt+0,Run,"AddSpecial ship_bp odyssey, AddSpecial ship_bp paragon, AddSpecial ship_bp astral, AddSpecial ship_bp fury, AddSpecial ship_bp revenant, AddSpecial ship_bp doom, AddSpecial ship_bp apogee, AddSpecial ship_bp shrike, AddSpecial ship_bp harbinger,AddSpecial ship_bp aurora, AddSpecial ship_bp medusa, AddSpecial ship_bp phantom,  AddSpecial ship_bp scarab, AddSpecial ship_bp shade, AddSpecial ship_bp afflictor, AddSpecial ship_bp tempest, AddSpecial ship_bp omen, AddSpecial ship_bp hyperion, AddSpecial ship_bp buffalo_pirates, AddSpecial ship_bp atlas, AddSpecial ship_bp valkyrie, AddSpecial ship_bp hammerhead, AddSpecial ship_bp prometheus,AddSpecial ship_bp ox, AddSpecial ship_bp phaeton, AddSpecial ship_bp eradicator, AddSpecial ship_bp eagle",添加速子蓝图
+Alt+P,Run,"AddSpecial weapon_bp tachyonlance, AddSpecial weapon_bp plasma, AddSpecial weapon_bp amsrm, AddSpecial weapon_bp ionpulser, AddSpecial weapon_bp heavyburst, AddSpecial weapon_bp heavyblaster, AddSpecial weapon_bp phasebeam, AddSpecial weapon_bp pulselaser,AddSpecial weapon_bp pdburst, AddSpecial weapon_bp amblaster, AddSpecial weapon_bp ioncannon, AddSpecial weapon_bp sabotpod, AddSpecial weapon_bp harpoonpod, AddSpecial weapon_bp salamanderpod, AddSpecial weapon_bp phasecl, AddSpecial weapon_bp annihilatorpod, AddSpecial weapon_bp typhoon, AddSpecial weapon_bp cyclone, AddSpecial weapon_bp hurricane, AddSpecial weapon_bp squall, AddSpecial weapon_bp hammerrack, AddSpecial weapon_bp tahlan_hekaton_rack, AddSpecial weapon_bp hveldriver",添加武器蓝图
 Alt+L,Run,,

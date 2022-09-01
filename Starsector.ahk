@@ -33,29 +33,25 @@ LoadCommands() {
     count := (CSV_TotalRows("commandsCSV"))
     ;count := 6
 
-    index := 2
-    While, (index < count) {
+    index := 2 ; Skip first line
+    While, (index <= count) {
         ; First cell
         hotkeyCell := CSV_ReadCell("commandsCSV", index, 1)
-        If(InStr(hotkeyCell, "#")) {
-            index ++
-            Continue
+        If !((InStr(hotkeyCell, "#")) || (hotkeyCell = "")) {
+            hotkeyCell := ConvertKeyNameToModifierSymbol(hotkeyCell)
+
+            ;Second cell
+            typeCell := CSV_ReadCell("commandsCSV", index, 2)
+
+            ;Third cell
+            commandsCell := CSV_ReadCell("commandsCSV", index, 3)
+            If (InStr(commandsCell, ",")) {
+                commandsCell := StrSplit(commandsCell, ",", " ")
+            }
+
+            command := New Command(hotkeyCell, typeCell, commandsCell)
+            commandList.Insert(command)
         }
-
-        hotkeyCell := ConvertKeyNameToModifierSymbol(hotkeyCell)
-
-        ;Second cell
-        typeCell := CSV_ReadCell("commandsCSV", index, 2)
-
-        ;Third cell
-        commandsCell := CSV_ReadCell("commandsCSV", index, 3)
-        If (InStr(commandsCell, ",")) {
-            commandsCell := StrSplit(commandsCell, ",", " ")
-        }
-
-        command := New Command(hotkeyCell, typeCell, commandsCell)
-        commandList.Insert(command)
-
         index ++
     }
 
@@ -120,17 +116,17 @@ Execute(executeType, commands){
     {
     Case "Send":
         SendCommand(commands)
-    Return
-Case "Run":
-    If IsObject(commands) {
-        RunCommandArray(commands)
+        Return
+    Case "Run":
+        If IsObject(commands) {
+            RunCommandArray(commands)
+            Return
+        }
+        RunCommand(commands)
+        Return
+    Default:
         Return
     }
-    RunCommand(commands)
-Return
-Default:
-Return
-}
 }
 
 SendCommand(text) {
@@ -140,9 +136,9 @@ SendCommand(text) {
 
 RunCommand(text) {
     Send %text%
-    Sleep 100
+    Sleep 150
     Send {Enter}
-    Sleep 100
+    Sleep 150
 }
 
 RunCommandArray(array) {
