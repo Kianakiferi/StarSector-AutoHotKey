@@ -35,5 +35,8 @@ It Has the following themes:
 - Plant
 - BluePrint
 
+## License
+This repositories is licensed under the [GNU General Public License v3.0](https://github.com/Kianakiferi/StarSector-AutoHotKey/blob/main/LICENSE)
+
 ## TODO
 - AutoHotKey with GUI
